@@ -1,0 +1,22 @@
+package movierental;
+
+public class ConcreteInterceptor implements Interceptor {
+    private final Dispatcher dispatcher;
+
+    public ConcreteInterceptor() {
+        this.dispatcher = new Dispatcher();
+    }
+
+    @Override
+    public double calculateRentalAmount(Rental rental) {
+        Context context = new Context(rental, "rentalAmount");
+        dispatcher.dispatch(context);
+        return context.getRentalAmount();
+    }
+
+    @Override
+    public int calculateFrequentRenterPoints(Rental rental) {
+        Context context = new Context(rental, "frequentRenterPoints");
+        dispatcher.dispatch(context);
+        return context.getFrequentRenterPoints();
+   
